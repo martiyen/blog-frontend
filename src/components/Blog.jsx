@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Togglable from "./Togglable"
 
-const Blog = ({ blog }) => {
+const Blog = ({ blog, addALike, removeBlog, currentUser }) => {
   const [visibleDetails, setVisibleDetails] = useState(false)
 
   const blogStyle = {
@@ -23,14 +23,17 @@ const Blog = ({ blog }) => {
       {blog.title} {blog.author}
       <button onClick={toggleDetailsVisibility}>hide</button>
         <div>
-          {blog.url}
+          <a href={blog.url}>{blog.url}</a>
         </div>
         <div>
-          likes {blog.likes} <button>like</button>
+          likes {blog.likes} <button onClick={() => addALike(blog)}>like</button>
         </div>
         <div>
           {blog.user.name}
         </div>
+        {blog.user.username === currentUser &&
+          <button onClick={() => removeBlog(blog)}>remove</button>
+        }
     </div>
     )
   }

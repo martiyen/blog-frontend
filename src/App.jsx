@@ -71,14 +71,20 @@ const App = () => {
     }
   }
 
-  const deleteBlog = async (id) => {
-    try {
-      blogService.setToken(user.token)
-      console.log(`deleting blog with id ${id}`)
-      const reponse = await blogService.remove(id)
-      setBlogs(blogs.filter(b => b.id !== id))
-    } catch(exception) {
-        console.log(exception)
+  const deleteBlog = async blog => {
+    if (window.confirm(`Remove ${blog.title} by ${blog.author}?`)) {
+      try {
+        blogService.setToken(user.token)
+        console.log(`deleting blog with id ${blog.id}`)
+        const reponse = await blogService.remove(blog.id)
+        setBlogs(blogs.filter(b => b.id !== blog.id))
+      } catch(exception) {
+        setNewNotification(exception.response.data.error)
+        setIsSuccessful(false)
+        setTimeout(() => {
+          setNewNotification(null)
+        }, 5000)
+      }
     }
   }
 
@@ -100,6 +106,22 @@ const App = () => {
       </form>
     )
   }
+
+  const addALike = async blog => {
+    const requestBody = { likes: blog.likes + 1}
+    try {
+      const updatedBlog = await blogService.update({ id: blog.id, updatedObject: requestBody })
+      setBlogs(blogs
+        .map(b => b.id === updatedBlog.id
+         ? { ...b, likes: updatedBlog.likes}
+         : b
+        ))
+    } catch(exception) {
+      console.log(exception.response.data.error)
+    }
+  }
+
+  const sortedBlogs = blogs.sort((a, b) => b.likes - a.likes)
 
   if (user === null) {
     return (
@@ -123,9 +145,9 @@ const App = () => {
           <BlogForm newBlogSubmission={newBlogSubmission} />
         </Togglable>
       </div>
-      {blogs.map(blog =>
+      {sortedBlogs.map(blog =>
       <div key={blog.id}>
-        <Blog blog={blog} />
+        <Blog blog={blog} addALike={addALike} removeBlog={deleteBlog} currentUser={user.username}/>
       </div>
       )}
     </div>
