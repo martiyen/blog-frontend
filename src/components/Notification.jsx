@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 const Notification = ({ message, isSuccessful }) => {
   const notificationStyle = {
     color: isSuccessful ? 'green' : 'red',
@@ -14,6 +16,10 @@ const Notification = ({ message, isSuccessful }) => {
       </div>
     )
   }
+}
+
+Notification.propTypes = {
+  isSuccessful: PropTypes.bool.isRequired
 }
 
 export default Notification
