@@ -7,7 +7,7 @@ const BlogForm = ({ newBlogSubmission }) => {
 
   const newBlog = event => {
     event.preventDefault()
-    
+
     newBlogSubmission({ title, author, url })
     setTitle('')
     setAuthor('')
@@ -33,7 +33,7 @@ const BlogForm = ({ newBlogSubmission }) => {
         <button type="submit">create</button>
       </div>
     </form>
-    )
-  }
+  )
+}
 
 export default BlogForm

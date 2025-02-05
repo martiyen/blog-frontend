@@ -17,7 +17,7 @@ const App = () => {
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
-    )  
+    )
   }, [])
 
   useEffect(() => {
@@ -93,28 +93,28 @@ const App = () => {
       <form onSubmit={handleLogin}>
         <h2>log in to the application</h2>
         <div>
-          username 
+          username
           <input type="text" value={username} onChange={({ target }) => {setUsername(target.value)}} />
         </div>
         <div>
-          password 
+          password
           <input type="password" value={password} onChange={({ target }) => {setPassword(target.value)}} />
         </div>
         <div>
-        <button type="submit">login</button>
+          <button type="submit">login</button>
         </div>
       </form>
     )
   }
 
   const addALike = async blog => {
-    const requestBody = { likes: blog.likes + 1}
+    const requestBody = { likes: blog.likes + 1 }
     try {
       const updatedBlog = await blogService.update({ id: blog.id, updatedObject: requestBody })
       setBlogs(blogs
         .map(b => b.id === updatedBlog.id
-         ? { ...b, likes: updatedBlog.likes}
-         : b
+          ? { ...b, likes: updatedBlog.likes }
+          : b
         ))
     } catch(exception) {
       console.log(exception.response.data.error)
@@ -137,7 +137,7 @@ const App = () => {
       <h2>blogs</h2>
       <Notification message={newNotification} isSuccessful={isSuccessful}/>
       <p>
-        {user.name} logged in 
+        {user.name} logged in
         <button onClick={handleLogout}>logout</button>
       </p>
       <div>
@@ -146,9 +146,9 @@ const App = () => {
         </Togglable>
       </div>
       {sortedBlogs.map(blog =>
-      <div key={blog.id}>
-        <Blog blog={blog} addALike={addALike} removeBlog={deleteBlog} currentUser={user.username}/>
-      </div>
+        <div key={blog.id}>
+          <Blog blog={blog} addALike={addALike} removeBlog={deleteBlog} currentUser={user.username}/>
+        </div>
       )}
     </div>
   )

@@ -1,5 +1,5 @@
-import { useState } from "react"
-import Togglable from "./Togglable"
+import { useState } from 'react'
+import Togglable from './Togglable'
 
 const Blog = ({ blog, addALike, removeBlog, currentUser }) => {
   const [visibleDetails, setVisibleDetails] = useState(false)
@@ -20,8 +20,8 @@ const Blog = ({ blog, addALike, removeBlog, currentUser }) => {
   if (visibleDetails) {
     return (
       <div style={blogStyle}>
-      {blog.title} {blog.author}
-      <button onClick={toggleDetailsVisibility}>hide</button>
+        {blog.title} {blog.author}
+        <button onClick={toggleDetailsVisibility}>hide</button>
         <div>
           <a href={blog.url}>{blog.url}</a>
         </div>
@@ -34,7 +34,7 @@ const Blog = ({ blog, addALike, removeBlog, currentUser }) => {
         {blog.user.username === currentUser &&
           <button onClick={() => removeBlog(blog)}>remove</button>
         }
-    </div>
+      </div>
     )
   }
 
