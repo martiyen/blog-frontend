@@ -20,6 +20,7 @@ const BlogForm = ({ newBlogSubmission }) => {
       <div>
         title
         <input
+          data-testid="title"
           type="text"
           value={title}
           onChange={({ target }) => {setTitle(target.value)}}
@@ -29,6 +30,7 @@ const BlogForm = ({ newBlogSubmission }) => {
       <div>
         author
         <input
+          data-testid="author"
           type="text"
           value={author}
           onChange={({ target }) => {setAuthor(target.value)}}
@@ -38,6 +40,7 @@ const BlogForm = ({ newBlogSubmission }) => {
       <div>
         url
         <input
+          data-testid="url"
           type="text"
           value={url}
           onChange={({ target }) => {setUrl(target.value)}}
