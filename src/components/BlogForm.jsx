@@ -19,15 +19,30 @@ const BlogForm = ({ newBlogSubmission }) => {
       <h2>create new</h2>
       <div>
         title
-        <input type="text" value={title} onChange={({ target }) => {setTitle(target.value)}} />
+        <input
+          type="text"
+          value={title}
+          onChange={({ target }) => {setTitle(target.value)}}
+          placeholder='Homecooking'
+        />
       </div>
       <div>
         author
-        <input type="text" value={author} onChange={({ target }) => {setAuthor(target.value)}} />
+        <input
+          type="text"
+          value={author}
+          onChange={({ target }) => {setAuthor(target.value)}}
+          placeholder='John Smith'
+        />
       </div>
       <div>
         url
-        <input type="text" value={url} onChange={({ target }) => {setUrl(target.value)}} />
+        <input
+          type="text"
+          value={url}
+          onChange={({ target }) => {setUrl(target.value)}}
+          placeholder='http://homecooking.com'
+        />
       </div>
       <div>
         <button type="submit">create</button>
